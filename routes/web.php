@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\PropertyController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +17,33 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Route::get('/a-propos', function () {
-    return view('about');
+Route::get('/about', function () {
+    $name = 'Cremobeur';
+
+    return view('about', [
+        'name' => $name,
+        'bibis' => [1, 2, 3, 4],
+    ]);
 });
+
+Route::get('/hello/{nom?}', function ($nom = 'Cremobeur') {
+    return "<h1>Hello $nom</h1>";
+})->where('nom', '.{2,}'); // Le nom doit faire 2 caractères minimum
+
+
+Route::get('/nos-annonces', [PropertyController::class, 'index']);
+
+Route::get('/show/{property}', [PropertyController::class, 'show'])->whereNumber('id');
+Route::get('/show/{id}', [PropertyController::class, 'show'])->whereNumber('id');
+
+Route::get('/show/creer', [PropertyController::class, 'create']);
+
+Route::post('/show/creer', [PropertyController::class, 'store']);
+
+Route::get('/show/editer/{id}', [PropertyController::class, 'edit']);
+Route::put('/show/editer/{id}', [PropertyController::class, 'update']);
+
+Route::delete('/show/{id}', [PropertyController::class, 'destroy']);

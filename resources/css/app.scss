@@ -1,0 +1,15 @@
+$forest: #0a3d62;
+$flat: #fad390;
+$good: #3c6382;
+
+body {
+    background-color: $forest;
+
+    .nav-immo {
+        background-color: $good;
+    }
+
+    .titre-annonces {
+        color: $flat;
+    }
+}
