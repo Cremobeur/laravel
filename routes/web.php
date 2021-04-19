@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PropertyController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -47,3 +48,6 @@ Route::get('/show/editer/{id}', [PropertyController::class, 'edit']);
 Route::put('/show/editer/{id}', [PropertyController::class, 'update']);
 
 Route::delete('/show/{id}', [PropertyController::class, 'destroy']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
